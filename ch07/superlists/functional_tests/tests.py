@@ -1,9 +1,9 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-class NewVisitorTest(LiveServerTestCase):  #1
+class NewVisitorTest(StaticLiveServerTestCase):  #1
 
     def setUp(self):  #2
         self.browser = webdriver.Firefox()
@@ -104,6 +104,7 @@ class NewVisitorTest(LiveServerTestCase):  #1
         # She notices the input box is nicely centered
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('testing\n')
+        inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
             512,
